@@ -1,0 +1,32 @@
+name: Build
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+
+    - name: Install system dependencies
+      run: |
+        sudo apt update
+        sudo apt install --no-install-recommends -y build-essential gcc-multilib g++-multilib git patch wget cpio file bc
+
+    - name: Cache downloads
+      uses: actions/cache@v2
+      with:
+        path: buildroot/dl
+        key: buildroot-dl
+
+    - name: Setup out of tree build
+      run: make O=$PWD -C $PWD/buildroot allnoconfig
+
+    - name: Setup build configuration
+      run: make BR2_DEFCONFIG=defconfig defconfig
+
+    - name: Build
+      run: make
