@@ -26,7 +26,7 @@ jobs:
       run: make O=$PWD -C $PWD/buildroot allnoconfig
 
     - name: Setup build configuration
-      run: make BR2_DEFCONFIG=defconfig defconfig
+      run: make BR2_DEFCONFIG=$PWD/defconfig defconfig
 
     - name: Build
       run: make
