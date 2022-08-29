@@ -28,6 +28,9 @@ jobs:
     - name: Setup build configuration
       run: make BR2_DEFCONFIG=$PWD/defconfig defconfig
 
+    - name: Download packages to build
+      run: make source
+
     - name: Build
       run: make
 
