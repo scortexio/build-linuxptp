@@ -25,7 +25,7 @@ jobs:
     - name: Download packages to build
       run: make source
 
-    - name: Build the package
+    - name: Build
       run: make
 
     - uses: actions/upload-artifact@v3
