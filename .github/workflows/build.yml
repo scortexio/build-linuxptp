@@ -19,14 +19,8 @@ jobs:
     - name: Cache downloads
       uses: actions/cache@v2
       with:
-        path: buildroot/dl
+        path: dl
         key: buildroot-dl
-
-    - name: Setup out of tree build
-      run: make O=$PWD -C $PWD/buildroot allnoconfig
-
-    - name: Setup build configuration
-      run: make BR2_DEFCONFIG=$PWD/defconfig defconfig
 
     - name: Download packages to build
       run: make source
@@ -36,5 +30,5 @@ jobs:
 
     - uses: actions/upload-artifact@v3
       with:
-        name: rootfs
-        path: images/rootfs.tar.gz
+        name: package
+        path: '*.ipk'
