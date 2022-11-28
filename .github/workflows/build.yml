@@ -22,6 +22,9 @@ jobs:
         path: dl
         key: buildroot-dl
 
+    - name: Download packages to build
+      run: make source
+
     - name: Build the package
       run: make
 
