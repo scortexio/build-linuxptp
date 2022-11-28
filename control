@@ -1,5 +1,5 @@
-Package: ptp4l
+Package: linuxptp
 Architecture: armhf
-Version: 3.1.1
+Version: LINUXPTP_VERSION
 Maintainer: Scortex <tech@scortex.io>
 Description: PTP4Linux built for Wago
