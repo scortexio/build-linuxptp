@@ -22,6 +22,7 @@ source: build_armhf/.config build_x86_64/.config
 
 PTP4L = build_armhf/target/usr/sbin/ptp4l
 OPKG_BUILD = build_armhf/host/bin/opkg-build
+FAKEROOT = build_armhf/host/bin/fakeroot
 PACKAGE = linuxptp_$(LINUXPTP_VERSION)_armhf.ipk
 
 build_armhf/.config: defconfig_armhf .gitmodules
@@ -40,8 +41,11 @@ package/CONTROL/control: control
 
 .PHONY: package
 package: $(PACKAGE)
-$(PACKAGE): package/CONTROL/control package/bin/ptp4l
-	$(OPKG_BUILD) package
+$(PACKAGE): package/CONTROL/control package/usr/sbin/ptp4l
+	$(FAKEROOT) -- sh -c ' \
+	chown 0.0 package && \
+	$(OPKG_BUILD) package \
+	'
 
 #
 # Targets for building the x86 Docker container
