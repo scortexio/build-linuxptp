@@ -31,7 +31,7 @@ build_armhf/.config: defconfig_armhf .gitmodules
 $(PTP4L) $(OPKG_BUILD): build_armhf/.config
 	$(MAKE) -C build_armhf
 
-package/bin/ptp4l: $(PTP4L)
+package/usr/sbin/ptp4l: $(PTP4L)
 	install -D $< $@
 
 package/CONTROL/control: control
